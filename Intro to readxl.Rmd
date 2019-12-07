@@ -58,17 +58,18 @@ kelp_golb <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsx"),
 
 ### read in and combine data from multiple worksheets using purrr::map_df()
 
-# ```{r multisheet}
+```{r multisheet}
 # # path to the data
-# kelp_path <- here("R-workshop-data","kelp_counts_curated.xlsx")
-# 
-# kelp_all_sites <- kelp_path %>%
-#   excel_sheets() %>% 
-#   set_names() %>% 
-#   map_df(read_excel,kelp_path,
-#          sheet = )
-# 
-# ```
+ kelp_path <- here("R-workshop-data","kelp_counts_curated.xlsx")
+
+ kelp_all_sites <- kelp_path %>%
+   excel_sheets() %>%
+   set_names() %>%
+   map_df(read_excel, path = kelp_path)
+   
+```
+
+
 ```{r}
 write_csv(kelp_counts, "Kelp_goleta_july.csv")
 ```
