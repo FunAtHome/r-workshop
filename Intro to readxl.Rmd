@@ -50,9 +50,32 @@ carp_cover_2000 <- read_excel(here("R-workshop-data","substrate_cover_curated.xl
 
 ### Reading in data from Excel workbook with multiple worksheets
 ```{r}
-kelp_counts <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsx"),
+kelp_golb <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsx"),
                           sheet = "golb"
                          )
 ```
 
+
+### read in and combine data from multiple worksheets using purrr::map_df()
+
+# ```{r multisheet}
+# # path to the data
+# kelp_path <- here("R-workshop-data","kelp_counts_curated.xlsx")
+# 
+# kelp_all_sites <- kelp_path %>%
+#   excel_sheets() %>% 
+#   set_names() %>% 
+#   map_df(read_excel,kelp_path,
+#          sheet = )
+# 
+# ```
+```{r}
+write_csv(kelp_counts, "Kelp_goleta_july.csv")
+```
+
+
+## writeexcel file
+```{r}
+write_xlsx(kelp_golb, "Kelp_goleta_july.xlsx")
+```
 
