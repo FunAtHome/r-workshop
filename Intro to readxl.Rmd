@@ -32,5 +32,27 @@ library(here)
 fish_counts <- read_csv(here("R-workshop-data","fish_counts_curated.csv"))
 ```
 
+### Read in data from a single excel worksheet in a workbook
+```{r readExcelFile}
+substrate_cover <- read_excel(here("R-workshop-data","substrate_cover_curated.xlsx"),skip =4, na = "-9999")
+
+```
+
+### Read a range from an excel document
+```{r}
+carp_cover_2000 <- read_excel(here("R-workshop-data","substrate_cover_curated.xlsx"),
+                         range = "D12:I15",
+                         col_names = c("site",
+                                       "transect","quad","side",
+                                       "type","coverage")
+                         )
+```
+
+### Reading in data from Excel workbook with multiple worksheets
+```{r}
+kelp_counts <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsx"),
+                          sheet = "golb"
+                         )
+```
 
 
