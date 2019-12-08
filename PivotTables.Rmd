@@ -17,7 +17,7 @@ library(skimr)  # install.packages("skimr")
 ## Read in the data
 
 ```{r}
-lobsters <- read_xlsx(here("R-workshop-data/lobsters.xlsx"))
+lobsters <- read_xlsx(here("R-workshop-data/lobsters2.xlsx"))
 ```
 
 explore data
