@@ -1,0 +1,84 @@
+---
+title: "Filter Joins (like vlookup)"
+author: "Jeff Manson"
+date: "12/8/2019"
+output: html_document
+---
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(readxl)
+library(here)
+
+```
+
+read in 3 files
+- invert_counts_curated.xlsx
+- fish_counts_currated.csv
+- Kelp_countes_curated.xlsx
+
+```{r}
+inverted_counts <- read_excel(here("R-workshop-data","invert_counts_curated.xlsx"))
+  
+fish_counts <- read_csv(here("R-workshop-data","fish_counts_curated.csv"))
+  
+kelp_count_abur <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsX"))
+```
+
+Select is for columns
+filter is for rows
+
+## Filter to match rows based on charater string
+only keep observations from fishcounts where common_name = "garibaldi"
+
+
+```{r}
+fish_garibaldi <- fish_counts %>% 
+  filter(common_name == "garibaldi")
+```
+ 
+## filter to keep or exclude based on numerics
+```{r}
+fish_over50 <- fish_counts %>% 
+  filter(total_count >=50)
+```
+
+Create a subset for fish at "mohk"
+
+```{r}
+fish_mohk <- fish_counts %>% 
+  filter(site == "mohk")
+```
+
+Filter to keep rows that match this or that
+Keep observation for garibaldi, blacksmith, or balck surfperch
+
+use the in %in% operatior to look for any matches within a vector
+```{r}
+fish_3sp <- fish_counts %>% 
+  filter(common_name %in% c("garibaldi","blacksmith","black surfperch"))
+```
+
+
+Using OR statments
+```{r}
+fish_3sp_v2 <- fish_counts %>% 
+  filter(common_name == "garibaldi" | common_name == "blacksmith"| common_name== "black surfperch")
+```
+
+## Filter to return rows that match multiple varibable
+I want a subset called urchin_abur_mohk that 
+- site is abur oe mohk AND
+-specied is "purple urchin"
+
+Some ways to this
+- seperate "AND" conditionws withing a single filter line by a comma,
+- seperate "and" conditions withing a signle filer by &
+- multiple filter statements with %>%
+
+```{r}
+urchin_abur_mohk <- inverted_counts %>% 
+  filter(site == "abur" | site == "mohk",common_name == "purple urchin")
+```
+

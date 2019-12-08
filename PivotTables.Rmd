@@ -93,3 +93,35 @@ ggsave(here("figures/LobsterMedian.png"), dpi = 300, width = 6, height =4 )
 
 ```
 
+# dplyr::count() for counting by group
+```{r}
+lobsters %>% 
+  count(site, year)
+```
+
+
+# Mutate() will add a new column 
+add a new column for size in m
+```{r}
+head(lobsters)
+
+lobsters %>% 
+  mutate(size_m  = size_mm /1000,
+         millenia = 2000,
+         observer = "Allison Horst")
+
+```
+
+
+## use select() function to subset variables by columns
+lets select 
+- date
+- site
+- size_m
+
+```{r}
+lobsters_selected <- lobsters %>%
+  mutate(size_m  = size_mm /1000) %>% 
+  select(date, site, size_m)
+```
+
