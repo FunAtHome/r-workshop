@@ -86,3 +86,85 @@ ggplot(data = ci_np, aes(x= year, y= visitors)) +
   geom_line(color = "red")
 
 ```
+
+
+## Customized elements based on varibale values or outcomes
+
+```{r}
+ggplot(data = ci_np, aes(x=year, y= visitors))+
+  geom_point(aes(size=visitors, 
+                 color = visitors),
+             pch = 17,
+             alhpa = 0.5)
+```
+
+```{r}
+ggplot(data = ci_np, aes(x=year, y= visitors))+
+  geom_col(aes(fill = visitors), color = "magenta")
+           
+```
+
+```{r}
+ggplot(data = ci_np, aes(x=year, y= visitors))+
+  geom_line(size =3,
+            color = "red")+
+  theme_dark()  
+```
+## add/update lables and titles
+
+Using 'labs'
+
+```{r}
+ggplot(data = ci_np, aes(x=year, y= visitors))+
+  geom_point(size =1,
+            color = "red")+
+  theme_dark() +
+  labs(x = "My axis Time",
+       y= " annual visitiation",
+       title = "channel Islands NP Visitation",
+       subtitle = "1963 - 2016")
+```
+
+## combine compatible geoms
+
+example pts on lines
+
+```{r}
+ggplot(data = ci_np, aes(x=year, y= visitors))+
+  geom_line(color = "purple")+
+  geom_point(color = "magenta",
+             aes(size = year))
+```
+
+create a column and line graph
+```{r}
+ggplot(data = ci_np, aes(x=year, y= visitors))+
+  geom_col(fill = "purple")+
+  geom_line(color = "magenta")
+```
+
+
+## create line graph with multiple series
+
+```{r}
+ggplot(data = ca_np, aes(x = year, y = visitors, color = park_name))+
+         geom_line()
+```
+
+## facetingg ggplot graphs
+
+- eaxh series gets its own plot panel
+
+```{r}
+ggplot(data = ca_np, aes(x = year, y = visitors, color = park_name))+
+         geom_line(show.legend = FALSE)+
+  theme_minimal()+
+  facet_wrap(~ park_name)
+```
+
+## Use ggsave to export a plot
+
+```{r}
+ggsave("np_graph.png",dpi =180, width = 8, height =7)
+```
+
