@@ -1,0 +1,88 @@
+---
+title: "Intro-ggplot2"
+author: "Jeff Manson"
+date: "12/8/2019"
+output: html_document
+---
+
+## Attach Packages
+```{r}
+library(tidyverse)
+library(readxl)
+library(here)
+```
+
+## Read in the data
+```{r}
+
+ca_np = read_csv(here("R-workshop-data","ca_np.csv"))
+ci_np = read_excel(here("R-workshop-data","ci_np.xlsx"))
+
+
+```
+
+## MAke a Graph
+
+1. Tell R we're using 'ggplot'
+2. Tell R what data we are using and what varibable to plot
+3. what type of graph (geom ) we are creating
+
+```{r, echo = FALSE}
+ggplot(data = ci_np, aes(x = year, y = visitors)) +
+  geom_line()
+
+```
+
+```{r, echo = FALSE}
+ggplot(data = ci_np, aes(x = year, y = visitors)) +
+  geom_point()
+
+```
+
+
+1. create a column graph
+2. create a area graph
+
+
+```{r, echo = FALSE}
+ggplot(data = ci_np, aes(x = year, y = visitors)) +
+  geom_col()
+
+
+```
+
+
+```{r, echo = FALSE}
+ggplot(data = ci_np, aes(x = year, y = visitors)) +
+  geom_area()
+
+```
+
+
+
+## Intro To customizing 'ggplot' graphs
+- color = (update point or line color)
+- fill =
+- line type
+- size
+- alhpa - transparentecy
+
+
+```{r}
+ggplot(data = ci_np, aes(x= year, y= visitors)) +
+  geom_line(color = "red", 
+            linetype = "dashed")
+
+```
+
+
+
+```{r}
+ggplot(data = ci_np, aes(x= year, y= visitors)) +
+  geom_point(color = "blue",
+             pch =17,
+             size = 4,
+             alpha = 0.5)+
+  geom_line(color = "red")
+
+```
