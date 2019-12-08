@@ -1,0 +1,38 @@
+---
+title: "Pivot Tables"
+author: "Jeff Manson"
+date: "12/8/2019"
+output: html_document
+---
+
+## attach libraries
+```{r}
+library(tidyverse)
+library(readxl)
+library(here)
+library(skimr)  # install.packages("skimr")
+
+```
+
+## Read in the data
+
+```{r}
+lobsters <- read_xlsx(here("R-workshop-data/lobsters.xlsx"))
+```
+
+explore data
+
+```{r}
+head(lobsters)
+summary(lobsters)
+
+## skimmer::skim() gives additional summary stats and is pipable
+skim(lobsters)
+
+# ggplot of lobsters
+ggplot(data = lobsters, aes(x= year))+
+  geom_bar()+
+  facet_wrap(~ site)
+```
+## our task is how the average size of lobsters has changed accross sites.
+
