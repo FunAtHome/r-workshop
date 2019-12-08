@@ -82,3 +82,63 @@ urchin_abur_mohk <- inverted_counts %>%
   filter(site == "abur" | site == "mohk",common_name == "purple urchin")
 ```
 
+
+
+Create a subset from fish couents called low_gb_rw that only contains;
+- obseravtations for "garibaldi and rock wrasse where totatl total count < 10
+```{r}
+
+low_gb_rw <- fish_counts %>% 
+  filter(common_name %in% c("garibaldi", "rock wrasse"), total_count <10)
+```
+
+## Filter rows that do not match conditions 
+
+Use != (indicaties does not match)
+
+make a subset from fish counts that doesn not contain mohawk reef
+```{r}
+fish_no_mohk <- fish_counts %>% 
+  filter(site != "mohk")
+```
+
+An example of filter as part of piped sequence:
+
+```{r}
+senorita_allyears <- fish_counts %>% 
+  filter(common_name == "senorita") %>% 
+  group_by(site) %>% 
+  summarize(count_all_years = sum(total_count))
+
+```
+
+## A Couple ways of joining data frames
+
+- full_join() keeps everything (safe join)
+- left_join() If mergeing A and B will only retain observationsin fromB that have matches in A
+
+```{r}
+fish_2016_2017 <- fish_counts %>% 
+  filter(year == 2016 | year == 2017)
+
+```
+
+## coerc 
+```{r}
+kelp_count_abur <- kelp_count_abur %>% 
+  mutate(year = as.numeric(year))
+```
+
+join Df with kelp counts abur
+```{r}
+abur_kelp_join <- fish_2016_2017 %>% 
+  full_join(kelp_count_abur, by = c("year","site"))
+```
+```{r}
+ggplot(abur_kelp_join, aes(x=year, y= total_count))+
+  geom_col(aes(fill= site), position = "dodge")
+```
+
+
+
+  
