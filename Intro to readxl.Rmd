@@ -71,7 +71,7 @@ kelp_golb <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsx"),
 
 
 ```{r}
-write_csv(kelp_counts, "Kelp_goleta_july.csv")
+write_csv(kelp_golb, "Kelp_goleta_july.csv")
 ```
 
 

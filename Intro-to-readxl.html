@@ -420,9 +420,24 @@ fish_counts &lt;- read_csv(here(&quot;R-workshop-data&quot;,&quot;fish_counts_cu
 </div>
 <div id="reading-in-data-from-excel-workbook-with-multiple-worksheets" class="section level3">
 <h3>Reading in data from Excel workbook with multiple worksheets</h3>
-<pre class="r"><code>kelp_counts &lt;- read_excel(here(&quot;R-workshop-data&quot;,&quot;kelp_counts_curated.xlsx&quot;),
+<pre class="r"><code>kelp_golb &lt;- read_excel(here(&quot;R-workshop-data&quot;,&quot;kelp_counts_curated.xlsx&quot;),
                           sheet = &quot;golb&quot;
                          )</code></pre>
+</div>
+<div id="read-in-and-combine-data-from-multiple-worksheets-using-purrrmap_df" class="section level3">
+<h3>read in and combine data from multiple worksheets using purrr::map_df()</h3>
+<pre class="r"><code># # path to the data
+ kelp_path &lt;- here(&quot;R-workshop-data&quot;,&quot;kelp_counts_curated.xlsx&quot;)
+
+ kelp_all_sites &lt;- kelp_path %&gt;%
+   excel_sheets() %&gt;%
+   set_names() %&gt;%
+   map_df(read_excel, path = kelp_path)</code></pre>
+<pre class="r"><code>write_csv(kelp_golb, &quot;Kelp_goleta_july.csv&quot;)</code></pre>
+</div>
+<div id="writeexcel-file" class="section level2">
+<h2>writeexcel file</h2>
+<pre class="r"><code>write_xlsx(kelp_golb, &quot;Kelp_goleta_july.xlsx&quot;)</code></pre>
 </div>
 </div>
 
